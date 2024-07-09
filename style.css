@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'NanumGothicR';
+  src: url('fonts/NanumGothic-Regular.ttf');
+}
+@font-face {
+  font-family: 'NanumGothicB';
+  src: url('fonts/NanumGothic-Bold.ttf');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'NanumGothicR', sans-serif;
+  box-sizing: border-box;
+}
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
