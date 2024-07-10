@@ -11,10 +11,238 @@
   margin: 0;
   padding: 0;
   font-family: 'NanumGothicR', sans-serif;
+  color: #333;
   box-sizing: border-box;
 }
 button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+input[type='text'] {
+  border: none;
+  background-color: #fff;
+  outline: none;
+}
+ul {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+h1,
+h2,
+h3 {
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: normal;
+}
+p {
+  margin-bottom: 0;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image: url('images/paper.jpg');
+  background-size: cover;
+  opacity: 0.1;
+}
+.mobile-menu {
+  padding-top: 3rem;
+  margin-left: -100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 250px;
+  height: 100vh;
+  background-color: #edf2fa;
+  box-shadow: 10px 0px 19px -18px rgba(20, 20, 20, 0.59);
+  -webkit-box-shadow: 10px 0px 19px -18px rgba(20, 20, 20, 0.59);
+  -moz-box-shadow: 10px 0px 19px -18px rgba(20, 20, 20, 0.59);
+  transition: all 500ms ease-in-out;
+}
+.mobile-menu .close-btn {
+  padding: 0.5rem 0.8rem;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.mobile-menu .mobile-menu-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mobile-menu-list button {
+  padding: 0.3rem;
+  margin: 0.3rem;
+  font-family: 'NanumGothicB';
+  text-transform: capitalize;
+}
+
+.top-menu {
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.top-menu i {
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 3px;
+}
+.top-menu i:hover {
+  background-color: #edf2fa;
+  /* #ff540b */
+}
+.top-menu .mobile-menu-btn {
+  display: none;
+  padding: 6px 7px;
+}
+.top-menu .search-btn {
+  padding: 6px;
+  margin-right: 0.5rem;
+}
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  visibility: hidden;
+  opacity: 0;
+  margin-left: -2rem;
+  transition: all 200ms ease-in;
+}
+.search-form.active {
+  visibility: visible;
+  opacity: 1;
+  margin-left: 0;
+}
+.search-form input {
+  padding: 0.2rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.search-form button {
+  padding: 0.3rem 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  background-color: #edf2fa;
+  border-radius: 5px;
+  border: 1px solid #dedede;
+}
+.search-form button:hover {
+  background-color: #c7cdd7;
+}
+
+h1 {
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: center;
+}
+h1 img {
+  max-width: 350px;
+  width: 90%;
+}
+.menu {
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-top: 1px solid rgb(235, 235, 235);
+  border-bottom: 3px double #666;
+}
+.menu button {
+  padding: 0.3rem 0.5rem;
+  font-family: 'NanumGothicB';
+  text-transform: capitalize;
+  color: #676767;
+  letter-spacing: -1px;
+  font-size: 0.95rem;
+  border-radius: 3px;
+}
+.menu button:hover {
+  background-color: #edf2fa;
+}
+
+.news-list {
+  margin-bottom: 3rem;
+}
+.news-list .no-news {
+  padding: 1rem 0;
+  text-align: center;
+}
+.news-list li {
+  margin-left: 0;
+  margin-right: 0;
+  border-top: 1px solid #dedede;
+}
+.news-list li:first-child {
+  border-top: none;
+}
+.news-list .left {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+.left img {
+  max-width: 90%;
+  max-height: 250px;
+}
+.news-list .right {
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.right h2 {
+  margin-bottom: 0.8rem;
+  font-size: 1.8rem;
+  font-family: 'NanumGothicB';
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.right p {
+  margin-bottom: 0.5rem;
+}
+.right .author,
+.right .date {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.footer {
+  padding: 5rem 0;
+  background-color: #f1efef;
+  text-align: center;
+}
+.footer .copyright {
+  font-family: 'NanumGothicB';
+  text-transform: capitalize;
+  color: rgb(158, 150, 150);
+  font-size: 0.9rem;
+}
+
+/* responsive */
+@media screen and (max-width: 992px) {
+  .top-menu .mobile-menu-btn {
+    display: block;
+  }
+  .menu {
+    display: none;
+  }
+  .news-list .right {
+    padding: 0;
+  }
 }

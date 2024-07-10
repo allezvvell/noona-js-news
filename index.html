@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>SH TIMES</title>
     <script
       src="https://kit.fontawesome.com/3be868d704.js"
       crossorigin="anonymous"
@@ -17,8 +17,9 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="background"></div>
     <div class="mobile-menu">
-      <i class="fa-solid fa-xmark"></i>
+      <i class="fa-solid fa-xmark close-btn"></i>
       <div class="mobile-menu-list">
         <button>sport</button>
         <button>tech</button>
@@ -40,9 +41,9 @@
     <div class="container">
       <header class="header">
         <div class="top-menu">
-          <i class="fa-solid fa-bars"></i>
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <form>
+          <i class="fa-solid fa-bars mobile-menu-btn"></i>
+          <i class="fa-solid fa-magnifying-glass search-btn"></i>
+          <form id="search-form" class="search-form">
             <input type="text" placeholder="search" />
             <button type="submit">go</button>
           </form>
@@ -66,13 +67,23 @@
           <button>energy</button>
         </div>
       </header>
-      <section class="news">뉴스내용</section>
+      <section class="news">
+        <ul class="news-list"></ul>
+      </section>
     </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="copyright">
+          Copyright © allezvvell@gmail.com All Rights Reserved
+        </p>
+      </div>
+    </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
