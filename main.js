@@ -1,6 +1,8 @@
 const API_KEY = 'c9a1f2b800e74037a62f70fd4762c1de';
 let newsList = [];
-let fetchError = '';
+let url = new URL(
+  `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`
+);
 
 const searchButton = document.querySelector('.search-btn');
 const searchForm = document.querySelector('.search-form');
@@ -24,70 +26,62 @@ searchForm.addEventListener('submit', getNewsByKeyword);
 
 getHeadlineNews();
 
-async function getHeadlineNews() {
-  const url = new URL(
+function getHeadlineNews() {
+  url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`
   );
-  fetchNews(url);
+  fetchNews();
 }
 
-async function getNewsByCategory(e) {
+function getNewsByCategory(e) {
   if (e.target.tagName !== 'BUTTON') return;
   const category = e.target.textContent;
-  const url = new URL(
+  url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?category=${category}`
   );
-  fetchNews(url);
+  fetchNews();
 }
 
-async function getNewsByKeyword(e) {
+function getNewsByKeyword(e) {
   e.preventDefault();
   const keyword = document.querySelector('.search-input').value.trim();
   if (keyword.length === 0) return;
-  const url = new URL(
+  url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?q=${keyword}`
   );
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    newsList = data.articles;
-  } catch (error) {
-    console.log(error);
-    fetchError = error;
-  }
-  render(keyword);
+  fetchNews(keyword);
   document.querySelector('.search-input').value = '';
 }
 
-async function fetchNews(url) {
+async function fetchNews(keyword) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    newsList = data.articles;
+    if (response.status === 200) {
+      if (data.articles.length === 0)
+        throw new Error('No matches for your search');
+      newsList = data.articles;
+      render(keyword);
+    } else {
+      throw new Error(data.message);
+    }
   } catch (error) {
-    console.log(error);
-    fetchError = error;
+    renderError(error.message);
   }
-  render();
 }
 
 function render(keyword) {
   let result = '';
-  if (fetchError !== '') {
-    result = fetchError;
-  } else if (newsList.length === 0) {
-    result = `<p class='no-news'>해당하는 뉴스가 없습니다</p>`;
-  } else {
-    newsList.forEach((item) => {
-      const title =
-        keyword === undefined ? item.title : markKeyword(keyword, item.title);
-      let desc = !item.description
-        ? '내용 없음'
-        : item.description.length > 200
-        ? item.description.substr(0, 200) + '...'
-        : item.description;
-      desc = keyword === undefined ? desc : markKeyword(keyword, desc);
-      result += `<li class="row">
+  newsList.forEach((item) => {
+    const title =
+      keyword === undefined ? item.title : markKeyword(keyword, item.title);
+    let desc = !item.description
+      ? '내용 없음'
+      : item.description.length > 200
+      ? item.description.substr(0, 200) + '...'
+      : item.description;
+    desc = keyword === undefined ? desc : markKeyword(keyword, desc);
+    result += `<li class="row">
             <div class="col-lg-4 left">
               <img src=${
                 item.urlToImage || 'images/noImage.jpg'
@@ -102,8 +96,12 @@ function render(keyword) {
               </div>
             </div>
           </li>`;
-    });
-  }
+  });
+  newsArea.innerHTML = result;
+}
+
+function renderError(errorMessage) {
+  const result = `<div class="alert alert-danger" role="alert" style="text-align:center;margin-top:0.5rem">${errorMessage}</div>`;
   newsArea.innerHTML = result;
 }
 
