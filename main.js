@@ -26,30 +26,30 @@ searchForm.addEventListener('submit', getNewsByKeyword);
 
 getHeadlineNews();
 
-function getHeadlineNews() {
+async function getHeadlineNews() {
   url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`
   );
-  fetchNews();
+  await fetchNews();
 }
 
-function getNewsByCategory(e) {
+async function getNewsByCategory(e) {
   if (e.target.tagName !== 'BUTTON') return;
   const category = e.target.textContent;
   url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?category=${category}`
   );
-  fetchNews();
+  await fetchNews();
 }
 
-function getNewsByKeyword(e) {
+async function getNewsByKeyword(e) {
   e.preventDefault();
   const keyword = document.querySelector('.search-input').value.trim();
   if (keyword.length === 0) return;
   url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?q=${keyword}`
   );
-  fetchNews(keyword);
+  await fetchNews(keyword);
   document.querySelector('.search-input').value = '';
 }
 
